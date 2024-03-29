@@ -4,7 +4,7 @@
 #include <memory>
 #include "DiscreteLaplaceOperator.h"
 
-using data_type = int;
+using data_type = float;
 
 constexpr size_t ROWS{ 100000 };
 constexpr size_t COLS{ 10000 };
@@ -21,13 +21,13 @@ void fill_random_data(data_type(&data)[ROWS][COLS])
 int main()
 {
 	// инициализация буферов
-	std::unique_ptr<int[]> input_ptr{ new int[ROWS * COLS] };
-	std::unique_ptr<int[]> output_ptr{ new int[ROWS * COLS] };
-	int(&input)[ROWS][COLS]{ reinterpret_cast<int(&)[ROWS][COLS]>(*input_ptr.get()) };
-	int(&output)[ROWS][COLS]{ reinterpret_cast<int(&)[ROWS][COLS]>(*output_ptr.get()) };
+	std::unique_ptr<data_type[]> input_ptr{ new data_type[ROWS * COLS] {} };
+	std::unique_ptr<data_type[]> output_ptr{ new data_type[ROWS * COLS] {} };
+	data_type(&input)[ROWS][COLS]{ reinterpret_cast<data_type(&)[ROWS][COLS]>(*input_ptr.get()) };
+	data_type(&output)[ROWS][COLS]{ reinterpret_cast<data_type(&)[ROWS][COLS]>(*output_ptr.get()) };
 
 	std::cout << "Initialize data" << std::endl;
-	//fill_random_data(input);
+	fill_random_data(input);
 	std::cout << "Initialize finished" << std::endl;
 
 
@@ -36,9 +36,17 @@ int main()
 	std::chrono::steady_clock clock{};
 	std::chrono::steady_clock::time_point start{ clock.now() };
 
-	DiscreteLaplaceOperator::CalculateSequential(input, output);
+	//DiscreteLaplaceOperator::CalculateSequential(input, output);
+	DiscreteLaplaceOperator::CalculateOpenMP(input, output);
 
 	std::chrono::steady_clock::time_point end{ clock.now() };
 	std::cout << "Calculated in: "
-		<< std::chrono::duration_cast<std::chrono::seconds>(end - start).count() << " s" << std::endl;
+		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms" << std::endl;
+
+	// для отмены отброса вызова функции при компиляции в режиме release
+	/*long long t{ 0 };
+	for (size_t i = 0; i < ROWS; i++)
+		for (size_t j = 0; j < COLS; j++)
+			t += output[i][j];
+	std::cout << "sum: " << t << std::endl;*/
 }
