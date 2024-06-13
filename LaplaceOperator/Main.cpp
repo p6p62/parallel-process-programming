@@ -2,6 +2,7 @@
 #include <random>
 #include <chrono>
 #include <memory>
+#include <omp.h>
 #include "DiscreteLaplaceOperator.h"
 
 constexpr auto CHECK_SUM_PRINT = 0;
@@ -38,12 +39,16 @@ void sequential_and_openmp()
 	std::chrono::steady_clock clock{};
 	std::chrono::steady_clock::time_point start{ clock.now() };
 
-	//DiscreteLaplaceOperator::CalculateSequential(input, output);
-	DiscreteLaplaceOperator::CalculateOpenMP(input, output);
+	double t1{ omp_get_wtime() };
+	DiscreteLaplaceOperator::CalculateSequential(input, output);
+	//DiscreteLaplaceOperator::CalculateOpenMP(input, output);
+	double t2{ omp_get_wtime() };
 
 	std::chrono::steady_clock::time_point end{ clock.now() };
 	std::cout << "Calculated in: "
 		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms" << std::endl;
+
+	std::cout << "wtime: " << t2 - t1 << std::endl;
 
 	// для отмены отброса вызова функции при компиляции в режиме release
 	/*long long t{ 0 };

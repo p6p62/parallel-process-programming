@@ -68,7 +68,7 @@ inline void DiscreteLaplaceOperator::CalculateOpenMP(
 {
 #pragma omp parallel for num_threads(2)
 	for (int i = 1; i < rows - 1; i++)
-		for (size_t j = 1; j < cols - 1; j++)
+		for (int j = 1; j < cols - 1; j++)
 			output_data[i][j]
 			= source_data[i - 1][j - 1] * LAPLACE_KERNEL[0][0]
 			+ source_data[i - 1][j - 0] * LAPLACE_KERNEL[0][1]
