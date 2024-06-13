@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GaussMethodSequential", "Ga
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LaplaceOperator", "LaplaceOperator\LaplaceOperator.vcxproj", "{59CC9182-E831-45EE-AD31-4B7B9AD9A3F6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DiscreteLaplaceOperatorCuda", "DiscreteLaplaceOperatorCuda\DiscreteLaplaceOperatorCuda.vcxproj", "{C254B016-C462-4838-BF6A-8C1C5F6615CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{59CC9182-E831-45EE-AD31-4B7B9AD9A3F6}.Release|x64.Build.0 = Release|x64
 		{59CC9182-E831-45EE-AD31-4B7B9AD9A3F6}.Release|x86.ActiveCfg = Release|Win32
 		{59CC9182-E831-45EE-AD31-4B7B9AD9A3F6}.Release|x86.Build.0 = Release|Win32
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Debug|x64.ActiveCfg = Debug|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Debug|x64.Build.0 = Debug|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Debug|x86.ActiveCfg = Debug|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Debug|x86.Build.0 = Debug|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Release|x64.ActiveCfg = Release|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Release|x64.Build.0 = Release|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Release|x86.ActiveCfg = Release|x64
+		{C254B016-C462-4838-BF6A-8C1C5F6615CA}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
